@@ -1,0 +1,41 @@
+# RELEASE
+release_name: "service-broker-integration-release"
+release_version: "1.0"
+
+# STEMCELL
+stemcell_os: "ubuntu-xenial"
+stemcell_version: "315.64"
+stemcell_alias: "xenial"
+
+# VM_TYPE
+vm_type_small: "small"
+
+# NETWORK
+service_networks_name: "default"
+
+# CF
+cf_uaa_oauth_url: "https://uaa.<CF_DOMAIN>"
+cf_api_url: "https://api.<CF_DOMAIN>"
+
+# BOSH
+bosh_client_id: "admin"                         # BOSH CLIENT ID
+bosh_client_secret: "<BOSH_CLIENT_SECRET>"      # bosh-deployment/vsphere/creds.yml 에 admin_password 값
+bosh_url: "https://<BOSH_VM_IP>:25555"
+bosh_oauth_url: "https://<BOSH_VM_IP>:8443"
+redis_job_name: "redis"                         # Service Broker 에 정의한 Redis Service의 이름
+rabbitmq_job_name: "rabbitmq"                   # Service Broker 에 정의한 Rabbitmq Service의 이름
+
+# PORATL API
+portal_api_url: "http://<PORTAL_API_VM_IP>:2222" # 배포되어 있는 portal-api 의 vm ip
+
+# MARIADB
+mariadb_port: "3306"
+mariadb_azs: [z5]
+mariadb_persistent_disk_type: "10GB"
+mariadb_admin_username: "admin"
+mariadb_admin_password: "<MARIA_DB_PWD>"
+
+# API
+service_broker_port: "8333"
+service_broker_azs: [z5]
+

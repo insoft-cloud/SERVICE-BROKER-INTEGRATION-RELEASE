@@ -1,0 +1,48 @@
+---
+name: service-broker-integration
+
+templates:
+  bin/service_ctl.erb: bin/service_ctl
+  bin/monit_debugger: bin/monit_debugger
+  data/application.yml.erb: data/application.yml
+  data/properties.sh: data/properties.sh
+  helpers/ctl_setup.sh: helpers/ctl_setup.sh
+  helpers/ctl_utils.sh: helpers/ctl_utils.sh
+
+packages:
+- java
+- service-broker-integration
+
+consumes:
+- name: broker-mariadb-link
+  type: broker-mariadb
+
+properties:
+  server.port:
+    description: "service broker server port"
+    default: 8333
+  cloudfoundry.api.url:
+    description: "clodufoundry api url"
+  cloudfoundry.api.uaaUrl:
+    description: "cloudfoundry api uaaUrl"
+  portal.api.url:
+    description: "portal api url"
+  portal.api.security.username:
+    description: "security username for access portal api"
+  portal.api.security.password:
+    description: "security pwd for access portal api"
+  bosh.client_id:
+    description: "bosh client id"
+  bosh.client_secret:
+    description: "bosh client secret"
+  bosh.url:
+    description: "bosh url"
+  bosh.oauth_url:
+    description: "bosh oauth url"
+  bosh.redis_job_name:
+    description: "redis job name for bosh deployment"
+  bosh.rabbitmq_job_name:
+    description: "rabbitmq job name for bosh deployment"
+  java_opts:
+    description: "Java options"
+    default: "-Xms1024m -Xmx1024m -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m"

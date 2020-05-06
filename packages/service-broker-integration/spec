@@ -1,0 +1,7 @@
+---
+name: service-broker-integration
+
+dependencies: []
+
+files:
+- service-broker-integration/SERVICE-BROKER-INTEGRATION.jar

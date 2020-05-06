@@ -1,0 +1,5 @@
+set -e -x
+
+JAR_NAME="service-broker-integration/SERVICE-BROKER-INTEGRATION.jar"
+
+cp -a ${JAR_NAME} ${BOSH_INSTALL_TARGET}

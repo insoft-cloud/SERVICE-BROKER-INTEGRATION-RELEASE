@@ -1,0 +1,5 @@
+check process service-broker
+  with pidfile /var/vcap/sys/run/service-broker-integration/service-broker-integration.pid
+  start program "/var/vcap/jobs/service-broker-integration/bin/service_ctl start" with timeout 30 seconds
+  stop program "/var/vcap/jobs/service-broker-integration/bin/service_ctl stop"
+  group vcap

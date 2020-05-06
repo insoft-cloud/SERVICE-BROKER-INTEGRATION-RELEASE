@@ -1,0 +1,68 @@
+name: ((deployment_name))                              # 서비스 배포이름(필수) bosh deployments 로 확인 가능한 이름
+releases:
+- name: ((release_name))                    # 서비스 릴리즈 이름(필수) bosh releases로 확인 가능
+  url: file:///root/workspace/user/hrjin/SERVICE-BROKER-INTEGRATION/release/((release_name)).tgz
+  version: ((release_version))                                              # 서비스 릴리즈 버전(필수):latest 시 업로드된 서비스 릴리즈 최신버전
+
+stemcells:
+- alias: ((stemcell_alias))
+  os: ((stemcell_os))
+  version: ((stemcell_version))
+
+update:
+  canaries: 1                            # canary 인스턴스 수(필수)
+  canary_watch_time: 30000-120000        # canary 인스턴스가 수행하기 위한 대기 시간(필수)
+  max_in_flight: 1                       # non-canary 인스턴스가 병렬로 update 하는 최대 개수(필수)
+  update_watch_time: 30000-120000        # non-canary 인스턴스가 수행하기 위한 대기 시간(필수)
+########## WEB SERVICE ##########
+
+instance_groups:
+- name: service-broker-integration
+  instances: 1
+  networks:
+  - name: ((service_networks_name))
+    default: [dns, gateway]
+  azs: ((service_broker_azs))
+  vm_type: ((vm_type_small))
+  stemcell: ((stemcell_alias))
+  jobs:
+  - name: service-broker-integration
+    release: ((release_name)) 
+    properties:
+      server:
+        port: ((service_broker_port))
+      cloudfoundry:
+        api:
+          url: ((cf_api_url))
+          uaaUrl: ((cf_uaa_oauth_url))
+      portal:
+        api:
+          url: ((portal_api_url))
+          security:
+            username: admin
+            password: openpaasta
+      bosh:
+        client_id: ((bosh_client_id))
+        client_secret: ((bosh_client_secret))
+        url: ((bosh_url))
+        oauth_url: ((bosh_oauth_url))
+        redis_job_name: ((redis_job_name))
+        rabbitmq_job_name: ((rabbitmq_job_name))
+      java_opts: '-XX:MaxMetaspaceSize=104857K -Xss349K -Xms681574K -XX:MetaspaceSize=104857K -Xmx681574K'
+
+- name: mariadb
+  instances: 1
+  networks:
+  - name: ((service_networks_name))
+    default: [dns, gateway]
+  azs: ((mariadb_azs))
+  vm_type: ((vm_type_small))
+  stemcell: ((stemcell_alias))
+  jobs:
+  - name: mariadb
+    release: ((release_name))
+    properties:
+      port: ((mariadb_port))
+      admin:
+        username: ((mariadb_admin_username))
+        password: ((mariadb_admin_password))

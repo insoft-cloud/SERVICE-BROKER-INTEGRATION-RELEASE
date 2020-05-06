@@ -1,0 +1,35 @@
+server:
+  port: <%= p('server.port')%>
+
+spring:
+  application:
+    name: service-broker-integration
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: "jdbc:mariadb://<%= link('broker-mariadb-link').instances[0].address %>:<%= link('broker-mariadb-link').p('port') %>/broker?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul"
+    username: <%= link('broker-mariadb-link').p('admin.username') %>
+    password: <%= link('broker-mariadb-link').p('admin.password') %>
+  jpa:
+    hibernate:
+      ddl-auto: none
+      show-sql: true
+
+cloudfoundry:
+  api:
+    url: <%= p('cloudfoundry.api.url') %>
+    uaaUrl:  <%= p('cloudfoundry.api.uaaUrl') %>
+    sslSkipValidation: true
+
+portal:
+  api:
+    url: <%= p('portal.api.url') %>
+    security:
+      username: <%= p('portal.api.security.username') %>
+      password: <%= p('portal.api.security.password') %>
+bosh:
+  client_id: <%= p('bosh.client_id') %>
+  client_secret:  <%= p('bosh.client_secret') %>
+  url: <%= p('bosh.url') %>
+  oauth_url: <%= p('bosh.oauth_url') %>
+  redis_job_name: <%= p('bosh.redis_job_name') %>
+  rabbitmq_job_name: <%= p('bosh.rabbitmq_job_name') %>
