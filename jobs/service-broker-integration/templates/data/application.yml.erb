@@ -10,15 +10,19 @@ spring:
     username: <%= link('broker-mariadb-link').p('admin.username') %>
     password: <%= link('broker-mariadb-link').p('admin.password') %>
   jpa:
+    generate-ddl: true
     hibernate:
       ddl-auto: none
       show-sql: true
+  rabbitmq:
+    host: <%= p('spring.rabbitmq.host')%>
+    port: <%= p('spring.rabbitmq.port')%>
+    username: <%= p('spring.rabbitmq.username')%>
+    password: <%= p('spring.rabbitmq.password')%>
 
-cloudfoundry:
-  api:
-    url: <%= p('cloudfoundry.api.url') %>
-    uaaUrl:  <%= p('cloudfoundry.api.uaaUrl') %>
-    sslSkipValidation: true
+broker:
+  username: admin
+  password: cloudfoundry
 
 portal:
   api:
@@ -31,5 +35,12 @@ bosh:
   client_secret:  <%= p('bosh.client_secret') %>
   url: <%= p('bosh.url') %>
   oauth_url: <%= p('bosh.oauth_url') %>
-  redis_job_name: <%= p('bosh.redis_job_name') %>
-  rabbitmq_job_name: <%= p('bosh.rabbitmq_job_name') %>
+  redis_job_name: redis
+  rabbitmq_job_name: rmq
+  mariadb_job_name: mariadb
+
+config:
+  rabbitmq:
+    queue-name: <%= p('config.rabbitmq.queue-name') %>
+    exchange-name: <%= p('config.rabbitmq.exchange-name') %>
+    routing-key: <%= p('config.rabbitmq.routing-key') %>

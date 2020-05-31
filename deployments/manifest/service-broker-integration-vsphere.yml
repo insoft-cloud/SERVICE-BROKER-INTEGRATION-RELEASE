@@ -1,7 +1,7 @@
 name: ((deployment_name))                              # 서비스 배포이름(필수) bosh deployments 로 확인 가능한 이름
 releases:
 - name: ((release_name))                    # 서비스 릴리즈 이름(필수) bosh releases로 확인 가능
-  url: file:///root/workspace/user/hrjin/SERVICE-BROKER-INTEGRATION/release/((release_name)).tgz
+  url: file:///data/hrjin/SERVICE-BROKER-INTEGRATION-RELEASE/release/((release_name)).tgz
   version: ((release_version))                                              # 서비스 릴리즈 버전(필수):latest 시 업로드된 서비스 릴리즈 최신버전
 
 stemcells:
@@ -20,10 +20,10 @@ instance_groups:
 - name: service-broker-integration
   instances: 1
   networks:
-  - name: ((service_networks_name))
+  - name: ((service_broker_network))
     default: [dns, gateway]
   azs: ((service_broker_azs))
-  vm_type: ((vm_type_small))
+  vm_type: ((service_broker_vm_type))
   stemcell: ((stemcell_alias))
   jobs:
   - name: service-broker-integration
@@ -31,10 +31,12 @@ instance_groups:
     properties:
       server:
         port: ((service_broker_port))
-      cloudfoundry:
-        api:
-          url: ((cf_api_url))
-          uaaUrl: ((cf_uaa_oauth_url))
+      spring:
+        rabbitmq:
+          host: ((rabbitmq_host_ip))
+          port: ((rabbitmq_port))
+          username: ((rabbitmq_username))
+          password: ((rabbitmq_password))
       portal:
         api:
           url: ((portal_api_url))
@@ -46,17 +48,21 @@ instance_groups:
         client_secret: ((bosh_client_secret))
         url: ((bosh_url))
         oauth_url: ((bosh_oauth_url))
-        redis_job_name: ((redis_job_name))
-        rabbitmq_job_name: ((rabbitmq_job_name))
+      config:
+        rabbitmq:
+          queue-name: ((rabbitmq_queue_name))
+          exchange-name: ((rabbitmq_exchange_name))
+          routing-key: ((rabbitmq_routing_key))
       java_opts: '-XX:MaxMetaspaceSize=104857K -Xss349K -Xms681574K -XX:MetaspaceSize=104857K -Xmx681574K'
 
 - name: mariadb
   instances: 1
   networks:
-  - name: ((service_networks_name))
+  - name: ((mariadb_network))
     default: [dns, gateway]
   azs: ((mariadb_azs))
-  vm_type: ((vm_type_small))
+  vm_type: ((mariadb_vm_type))
+  persistent_disk_type: ((mariadb_persistent_disk_type))
   stemcell: ((stemcell_alias))
   jobs:
   - name: mariadb

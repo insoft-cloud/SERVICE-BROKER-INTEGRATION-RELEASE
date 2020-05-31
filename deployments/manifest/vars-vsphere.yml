@@ -7,35 +7,36 @@ stemcell_os: "ubuntu-xenial"
 stemcell_version: "315.64"
 stemcell_alias: "xenial"
 
-# VM_TYPE
-vm_type_small: "small"
 
-# NETWORK
-service_networks_name: "default"
+# SERVICE BROKER INTEGRATION API
+service_broker_network: "default"
+service_broker_azs: [z5]
+service_broker_vm_type: "small"
+service_broker_port: "8333"
 
-# CF
-cf_uaa_oauth_url: "https://uaa.<CF_DOMAIN>"
-cf_api_url: "https://api.<CF_DOMAIN>"
+rabbitmq_host_ip: "172.30.11.35"
+rabbitmq_port: "5672"
+rabbitmq_username: "myadmin"
+rabbitmq_password: "jin1234"
 
-# BOSH
-bosh_client_id: "admin"                         # BOSH CLIENT ID
-bosh_client_secret: "<BOSH_CLIENT_SECRET>"      # bosh-deployment/vsphere/creds.yml 에 admin_password 값
-bosh_url: "https://<BOSH_VM_IP>:25555"
-bosh_oauth_url: "https://<BOSH_VM_IP>:8443"
-redis_job_name: "redis"                         # Service Broker 에 정의한 Redis Service의 이름
-rabbitmq_job_name: "rabbitmq"                   # Service Broker 에 정의한 Rabbitmq Service의 이름
+portal_api_url: "http://172.30.255.5:2222"
 
-# PORATL API
-portal_api_url: "http://<PORTAL_API_VM_IP>:2222" # 배포되어 있는 portal-api 의 vm ip
+bosh_client_id: "admin"
+bosh_client_secret: "7fxfagj0jizrfal3ldj3"      # bosh-deployment/vsphere/creds.yml 에 admin_password 값
+bosh_url: "https://172.30.50.10:25555"
+bosh_oauth_url: "https://172.30.50.10:8443"
+
+rabbitmq_queue_name: "catalog-service-broker"
+rabbitmq_exchange_name: "catalog-service-broker-exchange"
+rabbitmq_routing_key: "service.broker.#"
+
 
 # MARIADB
-mariadb_port: "3306"
+mariadb_network: "default"
 mariadb_azs: [z5]
+mariadb_vm_type: "small"
 mariadb_persistent_disk_type: "10GB"
+mariadb_port: "3306"
 mariadb_admin_username: "admin"
-mariadb_admin_password: "<MARIA_DB_PWD>"
-
-# API
-service_broker_port: "8333"
-service_broker_azs: [z5]
+mariadb_admin_password: "insoft@123"
 

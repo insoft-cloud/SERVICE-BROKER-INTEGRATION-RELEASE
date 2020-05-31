@@ -21,10 +21,14 @@ properties:
   server.port:
     description: "service broker server port"
     default: 8333
-  cloudfoundry.api.url:
-    description: "clodufoundry api url"
-  cloudfoundry.api.uaaUrl:
-    description: "cloudfoundry api uaaUrl"
+  spring.rabbitmq.host:
+    description: "rabbitmq host ip for service broker"
+  spring.rabbitmq.port:
+    description: "rabbitmq port for service broker"
+  spring.rabbitmq.username:
+    description: "rabbitmq username"
+  spring.rabbitmq.password:
+    description: "rabbitmq password"
   portal.api.url:
     description: "portal api url"
   portal.api.security.username:
@@ -39,10 +43,12 @@ properties:
     description: "bosh url"
   bosh.oauth_url:
     description: "bosh oauth url"
-  bosh.redis_job_name:
-    description: "redis job name for bosh deployment"
-  bosh.rabbitmq_job_name:
-    description: "rabbitmq job name for bosh deployment"
+  config.rabbitmq.queue-name:
+    description: "rabbitmq queue name for connection"
+  config.rabbitmq.exchange-name:
+    description: "rabbitmq exchange name for connection"
+  config.rabbitmq.routing-key:
+    description: "rabbitmq routing key for connection"
   java_opts:
     description: "Java options"
     default: "-Xms1024m -Xmx1024m -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m"
