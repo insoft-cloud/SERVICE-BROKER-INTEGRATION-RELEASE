@@ -49,6 +49,10 @@ properties:
     description: "rabbitmq exchange name for connection"
   config.rabbitmq.routing-key:
     description: "rabbitmq routing key for connection"
+  config.rabbitmq.response.exchange-name:
+    description: "rabbitmq response exchange name for connection"
+  config.rabbitmq.response.routing-key:
+    description: "rabbitmq response routing key for connection"
   java_opts:
     description: "Java options"
     default: "-Xms1024m -Xmx1024m -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m"

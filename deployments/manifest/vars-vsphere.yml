@@ -29,6 +29,8 @@ bosh_oauth_url: "https://172.30.50.10:8443"
 rabbitmq_queue_name: "catalog-service-broker"
 rabbitmq_exchange_name: "catalog-service-broker-exchange"
 rabbitmq_routing_key: "service.broker.#"
+rabbitmq_response_exchange_name: "catalog-service-broker-exchange-send"
+rabbitmq_response_routing_key: "service.broker-send.#"
 
 
 # MARIADB

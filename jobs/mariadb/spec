@@ -22,7 +22,7 @@ provides:
 properties:
   port:
     description: MariaDB server port
-    default: 13306
+    default: 3306
   admin.username:
     description: 'MariaDB admin user'
   admin.password:

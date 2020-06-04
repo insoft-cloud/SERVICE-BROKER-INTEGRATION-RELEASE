@@ -53,6 +53,9 @@ instance_groups:
           queue-name: ((rabbitmq_queue_name))
           exchange-name: ((rabbitmq_exchange_name))
           routing-key: ((rabbitmq_routing_key))
+          response:
+            exchange-name: ((rabbitmq_response_exchange_name))
+            routing-key: ((rabbitmq_response_routing_key))
       java_opts: '-XX:MaxMetaspaceSize=104857K -Xss349K -Xms681574K -XX:MetaspaceSize=104857K -Xmx681574K'
 
 - name: mariadb

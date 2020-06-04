@@ -44,3 +44,6 @@ config:
     queue-name: <%= p('config.rabbitmq.queue-name') %>
     exchange-name: <%= p('config.rabbitmq.exchange-name') %>
     routing-key: <%= p('config.rabbitmq.routing-key') %>
+    response:
+      exchange-name: <%= p('config.rabbitmq.response.exchange-name') %>
+      routing-key: <%= p('config.rabbitmq.response.routing-key') %>
